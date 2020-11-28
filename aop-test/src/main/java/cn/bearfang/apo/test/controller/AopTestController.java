@@ -5,10 +5,7 @@ import cn.bearfang.apo.test.model.RequestObject;
 import cn.bearfang.apo.test.model.ResponseObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @program: technology-test
@@ -21,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AopTestController {
 
     @RequestMapping(value="/log/aadvice/test",method = RequestMethod.POST)
-    @LogAnnotation
-    public String logAdviceTest(@RequestBody RequestObject request){
+    //@LogAnnotation
+    public String logAdviceTest(@RequestBody RequestObject request,@RequestParam(name = "sign") String signg){
         //"{\"message\":\"SUCCESS\",\"code\":200,\"data\":" + request + "}"
         ObjectMapper objectMapper = new ObjectMapper();
         ResponseObject responseObject = new ResponseObject();
@@ -31,6 +28,7 @@ public class AopTestController {
         responseObject.setData(request.getArg1() + request.getArg2());
         try {
             String s = objectMapper.writeValueAsString(responseObject);
+            System.out.println(signg);
             return s;
         } catch (JsonProcessingException e) {
             e.printStackTrace();
