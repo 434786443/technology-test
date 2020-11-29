@@ -36,5 +36,34 @@ public class IOUtils {
         return true;
     }
 
+    public static boolean copyStringFile(File source, File target, String charsetName){
+        if(source == null || target == null){
+            return false;
+        }
+        if(!source.exists()){
+            return false;
+        }
+
+        try(Reader reader = new BufferedReader(new InputStreamReader(new FileInputStream(source),charsetName));
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target), charsetName))){
+            int c;
+            while((c = reader.read()) !=-1){
+                writer.write(c);
+            }
+            writer.flush();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e);
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println(e);
+            return false;
+        }
+
+        return true;
+    }
+
 
 }
