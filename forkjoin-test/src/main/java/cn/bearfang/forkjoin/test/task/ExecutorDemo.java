@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
  **/
 public class ExecutorDemo<T> {
 
-
     public List<T> invokeTask(List<String> parameters) {
         ThreadPoolExecutor executor = new ThreadPoolExecutor(0, 1000,
                 60L, TimeUnit.SECONDS,
