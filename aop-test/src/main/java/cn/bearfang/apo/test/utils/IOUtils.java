@@ -70,15 +70,17 @@ public class IOUtils {
     public static void nioCopyFile(String sourceName, String targetName) {
 
         try(FileInputStream fileInputStream = new FileInputStream(sourceName);
-            FileOutputStream fileOutputStream = new FileOutputStream(targetName)){
-            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+            FileOutputStream fileOutputStream = new FileOutputStream(targetName);
             FileChannel sourceChannel = fileInputStream.getChannel();
-            FileChannel targetChannel = fileOutputStream.getChannel();
-            while ((sourceChannel.read(byteBuffer)) != -1){
-                byteBuffer.flip();//读写转换
-                targetChannel.write(byteBuffer);
-                byteBuffer.clear();//重要，不然每次read都只会返回0
-            }
+            FileChannel targetChannel = fileOutputStream.getChannel();){
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+//            while ((sourceChannel.read(byteBuffer)) != -1){
+//                byteBuffer.flip();//读写转换
+//                targetChannel.write(byteBuffer);
+//                byteBuffer.clear();//重要，不然每次read都只会返回0
+//            }
+            //快速拷贝
+            targetChannel.transferFrom(sourceChannel,0,sourceChannel.size());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
