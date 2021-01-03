@@ -1,6 +1,8 @@
 package cn.bearfang.apo.test.utils;
 
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * @program: technology-test
@@ -64,6 +66,27 @@ public class IOUtils {
 
         return true;
     }
+
+    public static void nioCopyFile(String sourceName, String targetName) {
+
+        try(FileInputStream fileInputStream = new FileInputStream(sourceName);
+            FileOutputStream fileOutputStream = new FileOutputStream(targetName)){
+            ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+            FileChannel sourceChannel = fileInputStream.getChannel();
+            FileChannel targetChannel = fileOutputStream.getChannel();
+            while ((sourceChannel.read(byteBuffer)) != -1){
+                byteBuffer.flip();//读写转换
+                targetChannel.write(byteBuffer);
+                byteBuffer.clear();//重要，不然每次read都只会返回0
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

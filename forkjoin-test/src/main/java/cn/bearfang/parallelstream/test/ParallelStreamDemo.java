@@ -4,6 +4,7 @@ import cn.bearfang.forkjoin.test.pojo.*;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @program: technology-test
