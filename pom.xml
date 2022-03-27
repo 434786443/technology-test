@@ -14,6 +14,7 @@
         <module>forkjoin-test</module>
         <module>aop-test</module>
         <module>tool-test</module>
+        <module>swagger-model</module>
     </modules>
 
     <properties>
