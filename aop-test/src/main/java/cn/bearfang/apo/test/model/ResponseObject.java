@@ -11,6 +11,6 @@ import lombok.Data;
 @Data
 public class ResponseObject {
     String code;
-    String message;
+    byte[] message;
     String data;
 }
