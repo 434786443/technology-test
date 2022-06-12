@@ -15,6 +15,8 @@
         <module>aop-test</module>
         <module>tool-test</module>
         <module>swagger-model</module>
+        <module>oauth2-model</module>
+
     </modules>
 
     <properties>
