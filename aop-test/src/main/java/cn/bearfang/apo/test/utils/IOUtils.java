@@ -16,8 +16,9 @@ public class IOUtils {
         if(!sourceFile.exists()){
             return false;
         }
-        try(BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(sourceFile));
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(targetFile))){
+        try{
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(sourceFile));
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(targetFile));
 //            byte[] b = new byte[1024];
 //            while (fileInputStream.read(b) != -1){
 //                fileOutputStream.write(b);
@@ -46,8 +47,8 @@ public class IOUtils {
             return false;
         }
 
-        try(Reader reader = new BufferedReader(new InputStreamReader(new FileInputStream(source),charsetName));
-            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target), charsetName))){
+        try{Reader reader = new BufferedReader(new InputStreamReader(new FileInputStream(source),charsetName));
+            Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(target), charsetName));
             int c;
             while((c = reader.read()) !=-1){
                 writer.write(c);
@@ -69,10 +70,10 @@ public class IOUtils {
 
     public static void nioCopyFile(String sourceName, String targetName) {
 
-        try(FileInputStream fileInputStream = new FileInputStream(sourceName);
+        try{FileInputStream fileInputStream = new FileInputStream(sourceName);
             FileOutputStream fileOutputStream = new FileOutputStream(targetName);
             FileChannel sourceChannel = fileInputStream.getChannel();
-            FileChannel targetChannel = fileOutputStream.getChannel();){
+            FileChannel targetChannel = fileOutputStream.getChannel();
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 //            while ((sourceChannel.read(byteBuffer)) != -1){
 //                byteBuffer.flip();//读写转换

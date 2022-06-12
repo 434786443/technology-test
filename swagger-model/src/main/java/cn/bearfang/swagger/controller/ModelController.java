@@ -11,6 +11,11 @@ import io.swagger.annotations.ApiResponse;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 /**
@@ -44,4 +49,11 @@ public class ModelController {
         throw new BizException("不要来烂掉了的秘密花园");
 
     }
+
+//    public AResp conn() throws IOException {
+//        URL url = new URL("");
+//        URLConnection urlConnection = url.openConnection();
+//        Class<?>[] aClass = new Class[1];
+//        Object content = url.getContent(aClass);
+//    }
 }
